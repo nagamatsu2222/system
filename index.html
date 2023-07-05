@@ -69,7 +69,7 @@
         font-size: 100%;
         box-sizing: border-box;
         border-radius: 5px;
-        border: 2px solid #ccc;
+        border: 1px solid #ccc;
       }
       .text_box_btn{
         -webkit-appearance: none;
@@ -128,7 +128,7 @@
           <th @click="sortBy('title')" :class="addClass('title')">役職</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="textAdd">
         <tr v-for="item in sort_users" v-bind:key="item.id">
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
@@ -137,7 +137,7 @@
           <td>{{ item.title }}</td>
         </tr>
       </tbody>
-      <tbody>
+      <!-- <tbody>
         <tr v-for="text in texts">
           <td>{{ text.id }}</td>
           <td>{{ text.name }}</td>
@@ -145,7 +145,7 @@
           <td>{{ text.division }}</td>
           <td>{{ text.title }}</td>
         </tr>
-      </tbody>
+      </tbody> -->
     </table>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@3.2.29/dist/vue.global.js"></script>

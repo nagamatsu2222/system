@@ -16,7 +16,11 @@ Vue.createApp({
         ],
         texts: [],
         nextId: "101",
-        errorMessage:""
+        errorMessage:"",
+        textBoxName: "",
+        textBoxCompany: "",
+        textBoxDivision: "",
+        textBoxTitle: ""
       }
     },
     async created() {
@@ -40,23 +44,26 @@ Vue.createApp({
       },
       addInput() {
         if(
-          this.nextId.match(/^[0-9]*$/) &&
           !this.textBoxName.match(/^[?!a-zA-Z0-9!-/:-@¥[-`{-~]*$/) &&
           !this.textBoxCompany.match(/^[?!a-zA-Z0-9!-/:-@¥[-`{-~]*$/) &&
           !this.textBoxDivision.match(/^[?!a-zA-Z0-9!-/:-@¥[-`{-~]*$/) &&
           !this.textBoxTitle.match(/^[?!a-zA-Z0-9!-/:-@¥[-`{-~]*$/)
           ){
-          this.texts.push({
-            id: this.nextId++,
-            name: this.textBoxName,
-            company: this.textBoxCompany,
-            division: this.textBoxDivision,
-            title: this.textBoxTitle});
+            let textAdd = document.getElementById('textAdd');
+            textAdd.insertAdjacentHTML('beforeend', `<tr><td>${this.nextId++}</td><td>${this.textBoxName}</td><td>${this.textBoxCompany}</td><td>${this.textBoxDivision}</td><td>${this.textBoxTitle}</td><tr>`);
 
-          this.textBoxName = '';
-          this.textBoxCompany = '';
-          this.textBoxDivision = '';
-          this.textBoxTitle = '';
+          // 別の書き方
+          // this.texts.push({
+          //   id: this.nextId++,
+          //   name: this.textBoxName,
+          //   company: this.textBoxCompany,
+          //   division: this.textBoxDivision,
+          //   title: this.textBoxTitle
+          // });
+          // this.textBoxName = '';
+          // this.textBoxCompany = '';
+          // this.textBoxDivision = '';
+          // this.textBoxTitle = '';
         }else {
           this.errorMessage = '※漢字、ひらがな、カタカナで入力してください'
         }
