@@ -31,7 +31,7 @@
         margin: 0 auto;
         text-align: right;
       }
-      input[type=search] {
+      input.search {
         -webkit-appearance: none;
         display: inline-block;
         margin-right: 0;
@@ -45,7 +45,7 @@
         border: 1px solid #ccc;
         border-right: none;
       }
-      input[type=submit] {
+      input.search_btn{
         -webkit-appearance: none;
         display: inline-block;
         padding: 0 10px;
@@ -58,17 +58,64 @@
         border-radius: 0 5px 5px 0;
         background: #1f76e2;
       }
+      .text_box{
+        -webkit-appearance: none;
+        display: inline-block;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        padding: 10px;
+        width: 21%;
+        height: 40px;
+        font-size: 100%;
+        box-sizing: border-box;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      .text_box_btn{
+        -webkit-appearance: none;
+        display: inline-block;
+        padding: 0 10px;
+        color: #fff;
+        width: 8.1%;
+        height: 40px;
+        font-size: 100%;
+        vertical-align: top;
+        border: none;
+        border-radius: 0;
+        background: #283545;
+      }
+      .text_box_wrap{
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+      }
+      .error_message{
+        color: red;
+        font-weight: bold;
+        text-align: left;
+        margin: 0;
+      }
     </style>
 </head>
 <body>
   <div id="app">
     <div class="selected_wrap">
+      <div class="text_box_wrap">
+        <input type="search" placeholder="名前" class="text_box" v-model="textBoxName">
+        <input type="search" placeholder="会社名" class="text_box" v-model="textBoxCompany">
+        <input type="search" placeholder="部署" class="text_box" v-model="textBoxDivision">
+        <input type="search" placeholder="役職" class="text_box" v-model="textBoxTitle">
+        <input @click="addInput" type="submit" value="作成"  class="text_box_btn">
+        
+      </div>
+<p class="error_message">{{ errorMessage }}</p>
       <select v-model.number="selectedItem">
         <option v-for="item in items" :key="index" :value="item.value">{{ item.name }}</option>
       </select>
       <div>
-        <input type="search" placeholder="キーワード" v-model="search">
-        <input @click="sortBy('search')" :class="addClass('search')" type="submit" name="btnSearch" value="検索">
+        <input type="search" placeholder="キーワード" v-model="search" class="search">
+        <input @click="sortBy('search')" :class="addClass('search')" type="submit" class="search_btn">
       </div>
     </div>
     <table class="border">
@@ -81,7 +128,7 @@
           <th @click="sortBy('title')" :class="addClass('title')">役職</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="textAdd">
         <tr v-for="item in sort_users" v-bind:key="item.id">
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
@@ -90,6 +137,15 @@
           <td>{{ item.title }}</td>
         </tr>
       </tbody>
+      <!-- <tbody>
+        <tr v-for="text in texts">
+          <td>{{ text.id }}</td>
+          <td>{{ text.name }}</td>
+          <td>{{ text.company }}</td>
+          <td>{{ text.division }}</td>
+          <td>{{ text.title }}</td>
+        </tr>
+      </tbody> -->
     </table>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@3.2.29/dist/vue.global.js"></script>
